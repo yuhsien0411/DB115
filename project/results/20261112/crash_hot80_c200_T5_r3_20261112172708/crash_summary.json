@@ -1,0 +1,21 @@
+{
+ "run_id": "crash_hot80_c200_T5_r3_20261112172708",
+ "repeat": 3,
+ "failed_component": "redis(SIGKILL)",
+ "redis_persistence": "save='', appendonly=no",
+ "flush_interval_s": 5.0,
+ "last_flush_commit_at": 1794504444.412538,
+ "crash_at": 1794504448.376781,
+ "actual_exposure_s": 4.0,
+ "baseline_B0": 2214998157,
+ "acknowledged_N": 1504388,
+ "failed_ops": 200,
+ "unknown_ops": 0,
+ "pg_increment_P": 1133109,
+ "pg_gap_N_minus_P": 371279,
+ "redis_recovered_count": "dbsize=0",
+ "pg_increment_after_recovery": 1133109,
+ "net_gap_after_recovery": 371279,
+ "raw_log_path": "results/20261112/crash_hot80_c200_T5_r3_20261112172708",
+ "notes": "bound=acks_after_last_snapshot=371584; throughput=93177.8/s over 16.15s; ref throughput*T=465889; acked_lost in [371279, 371279] (in_flight=200, sent_before_snapshot=0); phase=0.8; exposure from snap_ts; criterion3=PASS"
+}

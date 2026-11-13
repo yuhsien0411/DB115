@@ -1,0 +1,4 @@
+{"event": "worker_start", "run_id": "crash_hot80_c20_T5_r1_20261112162630", "interval_s": 5.0, "ts": 1794500791.387302}
+{"event": "flush", "final": false, "changed": 1000, "redis_sum": 2032324154, "snap_ts": 1794500796.394596, "ms": 104.73, "ts": 1794500796.499341}
+{"event": "redis_unreachable", "error": "ConnectionError", "final": true, "ts": 1794500800.970037}
+{"event": "worker_stop", "code": 0, "ts": 1794500800.972169}

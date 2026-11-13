@@ -1,0 +1,40 @@
+網站需要的操作（應成功）
+  ✓ ok   讀商品
+  ✓ ok   讀顧客編號與姓名
+  ✓ ok   瀏覽數 +1
+  ✓ ok   鎖商品列
+  ✓ ok   以 place_order() 下單
+  ✓ ok   寫冪等紀錄
+  ✓ ok   寫回寫紀錄
+  ✓ ok   advisory lock
+  ✓ ok   加入購物車
+  ✓ ok   改購物車數量
+  ✓ ok   移除購物車商品
+不該有的權限（應被拒）
+  ✓ deny 讀顧客 email
+  ✓ deny 改價格
+  ✓ deny 刪訂單
+  ✓ deny 改訂單金額
+  ✓ deny 改冪等紀錄
+  ✓ deny 刪冪等紀錄
+  ✓ deny TRUNCATE 明細
+  ✓ deny 改購物車加入價
+  ✓ deny 改購物車所屬顧客
+  ✓ deny TRUNCATE 購物車
+  ✓ deny DROP 商品表
+  ✓ deny 在 public 建表
+  ✓ deny 建暫存表
+  ✓ deny 改 place_order()
+  ✓ deny 讀課程 shop 的訂單
+  ✓ deny DROP 課程 shop 的表
+  ✓ deny 建立資料庫
+  ✓ deny 建立帳號
+  ✓ deny 讀伺服器檔案
+  ✓ deny 提權成 superuser
+結果：31 項符合預期，0 項不符
+ rolname | rolsuper | rolcreatedb | rolcreaterole | rolconnlimit 
+---------+----------+-------------+---------------+--------------
+ student | t        | f           | f             |           -1
+ q01_web | f        | f           | f             |           20
+(2 rows)
+

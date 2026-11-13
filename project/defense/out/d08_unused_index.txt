@@ -1,0 +1,122 @@
+Timing is on.
+======== 情況 1：選擇率太高 —— orders_pkey（order_id）
+-- (1a) 只拿 0.1%：用索引
+EXPLAIN ANALYZE SELECT sum(amount) FROM orders WHERE order_id <= 1000;
+                                                           QUERY PLAN                                                           
+--------------------------------------------------------------------------------------------------------------------------------
+ Aggregate  (cost=40.35..40.36 rows=1 width=32) (actual time=0.254..0.254 rows=1 loops=1)
+   ->  Index Scan using orders_pkey on orders  (cost=0.42..38.10 rows=896 width=6) (actual time=0.021..0.158 rows=1000 loops=1)
+         Index Cond: (order_id <= 1000)
+ Planning Time: 0.483 ms
+ Execution Time: 0.327 ms
+(5 rows)
+
+Time: 1.569 ms
+-- (1b) 拿 90%：同一個索引，planner 改走全表掃描
+EXPLAIN ANALYZE SELECT sum(amount) FROM orders WHERE order_id <= 900000;
+                                                                QUERY PLAN                                                                
+------------------------------------------------------------------------------------------------------------------------------------------
+ Finalize Aggregate  (cost=14525.99..14526.00 rows=1 width=32) (actual time=47.631..49.671 rows=1 loops=1)
+   ->  Gather  (cost=14525.77..14525.98 rows=2 width=32) (actual time=47.558..49.663 rows=3 loops=1)
+         Workers Planned: 2
+         Workers Launched: 2
+         ->  Partial Aggregate  (cost=13525.77..13525.78 rows=1 width=32) (actual time=45.215..45.216 rows=1 loops=3)
+               ->  Parallel Seq Scan on orders  (cost=0.00..12587.57 rows=375277 width=6) (actual time=0.016..23.489 rows=300000 loops=3)
+                     Filter: (order_id <= 900000)
+                     Rows Removed by Filter: 33334
+ Planning Time: 0.034 ms
+ Execution Time: 49.692 ms
+(10 rows)
+
+Time: 49.922 ms
+-- (1c) 強迫它用索引，看看是不是真的比較慢
+SET enable_seqscan = off;
+SET
+Time: 0.097 ms
+EXPLAIN ANALYZE SELECT sum(amount) FROM orders WHERE order_id <= 900000;
+                                                                          QUERY PLAN                                                                          
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Finalize Aggregate  (cost=28975.60..28975.61 rows=1 width=32) (actual time=73.595..77.513 rows=1 loops=1)
+   ->  Gather  (cost=28975.38..28975.59 rows=2 width=32) (actual time=73.515..77.498 rows=3 loops=1)
+         Workers Planned: 2
+         Workers Launched: 2
+         ->  Partial Aggregate  (cost=27975.38..27975.39 rows=1 width=32) (actual time=71.473..71.474 rows=1 loops=3)
+               ->  Parallel Index Scan using orders_pkey on orders  (cost=0.42..27037.18 rows=375277 width=6) (actual time=0.037..46.821 rows=300000 loops=3)
+                     Index Cond: (order_id <= 900000)
+ Planning Time: 0.058 ms
+ Execution Time: 77.538 ms
+(9 rows)
+
+Time: 77.816 ms
+RESET enable_seqscan;
+RESET
+Time: 0.088 ms
+-- planner 依據的統計資訊：orders 有幾列、幾頁
+SELECT relname, reltuples::bigint, relpages FROM pg_class WHERE relname = 'orders';
+ relname | reltuples | relpages 
+---------+-----------+----------
+ orders  |   1000000 |     7369
+(1 row)
+
+Time: 0.555 ms
+======== 情況 2：不是選擇率，是「這個運算子用不了這個索引」—— web/audit.sql 第 07 項
+-- 資料庫定序
+SELECT datcollate FROM pg_database WHERE datname = current_database();
+ datcollate 
+------------
+ C.UTF-8
+(1 row)
+
+Time: 0.243 ms
+-- (2a) audit.sql 原寫法：LIKE 前綴。planner 估 1 列（非常有選擇性），卻仍全表掃描
+EXPLAIN ANALYZE SELECT count(*) FROM view_flush_log WHERE run_id LIKE 'web\_%';
+                                                           QUERY PLAN                                                           
+--------------------------------------------------------------------------------------------------------------------------------
+ Aggregate  (cost=7974.58..7974.59 rows=1 width=8) (actual time=10.731..12.644 rows=1 loops=1)
+   ->  Gather  (cost=1000.00..7974.57 rows=1 width=0) (actual time=10.729..12.641 rows=0 loops=1)
+         Workers Planned: 2
+         Workers Launched: 2
+         ->  Parallel Seq Scan on view_flush_log  (cost=0.00..6974.47 rows=1 width=0) (actual time=8.709..8.710 rows=0 loops=3)
+               Filter: (run_id ~~ 'web\_%'::text)
+               Rows Removed by Filter: 130302
+ Planning Time: 0.134 ms
+ Execution Time: 12.657 ms
+(9 rows)
+
+Time: 13.116 ms
+-- (2b) 把全表掃描關掉：還是用不了索引（Disabled 或成本變天價），證明不是成本問題而是能力問題
+SET enable_seqscan = off;
+SET
+Time: 0.086 ms
+EXPLAIN ANALYZE SELECT count(*) FROM view_flush_log WHERE run_id LIKE 'web\_%';
+                                                                                      QUERY PLAN                                                                                       
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Aggregate  (cost=29900.49..29900.50 rows=1 width=8) (actual time=113.872..116.887 rows=1 loops=1)
+   ->  Gather  (cost=1000.42..29900.49 rows=1 width=0) (actual time=113.869..116.883 rows=0 loops=1)
+         Workers Planned: 2
+         Workers Launched: 2
+         ->  Parallel Index Only Scan using view_flush_log_run_id_flushed_at_idx on view_flush_log  (cost=0.42..28900.39 rows=1 width=0) (actual time=111.883..111.883 rows=0 loops=3)
+               Filter: (run_id ~~ 'web\_%'::text)
+               Rows Removed by Filter: 130302
+               Heap Fetches: 44516
+ Planning Time: 0.085 ms
+ Execution Time: 116.924 ms
+(10 rows)
+
+Time: 117.269 ms
+RESET enable_seqscan;
+RESET
+Time: 0.097 ms
+-- (2c) 改寫成範圍條件（語意相同）：索引就用得上了
+EXPLAIN ANALYZE SELECT count(*) FROM view_flush_log WHERE run_id >= 'web_' AND run_id < 'web`';
+                                                                           QUERY PLAN                                                                           
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Aggregate  (cost=8.44..8.45 rows=1 width=8) (actual time=0.018..0.019 rows=1 loops=1)
+   ->  Index Only Scan using view_flush_log_run_id_flushed_at_idx on view_flush_log  (cost=0.42..8.44 rows=1 width=0) (actual time=0.017..0.017 rows=0 loops=1)
+         Index Cond: ((run_id >= 'web_'::text) AND (run_id < 'web`'::text))
+         Heap Fetches: 0
+ Planning Time: 0.085 ms
+ Execution Time: 0.032 ms
+(6 rows)
+
+Time: 0.408 ms

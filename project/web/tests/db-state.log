@@ -1,0 +1,78 @@
+ current_user 
+--------------
+ student
+(1 row)
+
+   public_products_fingerprint    
+----------------------------------
+ f1496a1de96b3d6a68bbf34271d96af1
+(1 row)
+
+ table_schema | table_name  | column_name | data_type 
+--------------+-------------+-------------+-----------
+ public       | order_items | unit_price  | integer
+ public       | orders      | amount      | integer
+ public       | products    | price       | integer
+ q01_web_demo | order_items | unit_price  | integer
+ q01_web_demo | orders      | amount      | integer
+ q01_web_demo | products    | price       | integer
+(6 rows)
+
+ rolname | rolsuper | rolcreatedb | rolcreaterole | rolreplication | rolbypassrls | rolconnlimit 
+---------+----------+-------------+---------------+----------------+--------------+--------------
+ q01_web | f        | f           | f             | f              | f            |           20
+(1 row)
+
+ datname |                 datacl                  
+---------+-----------------------------------------
+ q01     | {student=CTc/student,q01_web=c/student}
+(1 row)
+
+   nspname    |                 nspacl                 
+--------------+----------------------------------------
+ q01_web_demo | {student=UC/student,q01_web=U/student}
+(1 row)
+
+           relname           |                    relacl                    
+-----------------------------+----------------------------------------------
+ customers                   | {student=arwdDxt/student,q01_web=r/student}
+ customers_pkey              | 
+ order_items                 | {student=arwdDxt/student,q01_web=ar/student}
+ order_items_pkey            | 
+ orders                      | {student=arwdDxt/student,q01_web=ar/student}
+ orders_order_id_seq         | {student=rwU/student,q01_web=U/student}
+ orders_pkey                 | 
+ orders_request_id_key       | 
+ products                    | {student=arwdDxt/student,q01_web=r/student}
+ products_pkey               | 
+ view_flush_log              | {student=arwdDxt/student,q01_web=ar/student}
+ view_flush_log_flush_id_seq | {student=rwU/student,q01_web=U/student}
+ view_flush_log_pkey         | 
+(13 rows)
+
+ relname  |  attname   |       attacl        
+----------+------------+---------------------
+ products | stock      | {q01_web=w/student}
+ products | view_count | {q01_web=w/student}
+(2 rows)
+
+ products | customers | orders | order_items 
+----------+-----------+--------+-------------
+     1000 |        10 |      3 |           4
+(1 row)
+
+ remaining_fixtures 
+--------------------
+                  0
+(1 row)
+
+ active_web_connections 
+------------------------
+                      0
+(1 row)
+
+ remaining_demo_advisory_locks 
+-------------------------------
+                             0
+(1 row)
+

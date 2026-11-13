@@ -1,0 +1,107 @@
+Timing is on.
+== A 前台「我的訂單」 GET /api/store/orders?customer_id=1 （server.py 第 370 行）
+EXPLAIN (ANALYZE, BUFFERS) SELECT o.*,c.name AS customer_name FROM orders o JOIN customers c USING(customer_id) WHERE (1::int IS NULL OR customer_id=1) ORDER BY order_id DESC LIMIT 100;
+                                                                      QUERY PLAN                                                                      
+------------------------------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=13654.26..13656.12 rows=16 width=41) (actual time=19.051..22.313 rows=13 loops=1)
+   Buffers: shared hit=3460 read=3970
+   ->  Gather Merge  (cost=13654.26..13656.12 rows=16 width=41) (actual time=19.049..22.310 rows=13 loops=1)
+         Workers Planned: 2
+         Workers Launched: 2
+         Buffers: shared hit=3460 read=3970
+         ->  Sort  (cost=12654.23..12654.25 rows=8 width=41) (actual time=16.676..16.682 rows=4 loops=3)
+               Sort Key: o.order_id DESC
+               Sort Method: quicksort  Memory: 25kB
+               Buffers: shared hit=3460 read=3970
+               Worker 0:  Sort Method: quicksort  Memory: 25kB
+               Worker 1:  Sort Method: quicksort  Memory: 25kB
+               ->  Nested Loop  (cost=0.29..12654.11 rows=8 width=41) (actual time=3.970..16.659 rows=4 loops=3)
+                     Buffers: shared hit=3446 read=3970
+                     ->  Parallel Seq Scan on orders o  (cost=0.00..12587.57 rows=8 width=27) (actual time=3.946..16.619 rows=4 loops=3)
+                           Filter: (customer_id = 1)
+                           Rows Removed by Filter: 333330
+                           Buffers: shared hit=3405 read=3970
+                     ->  Index Scan using customers_pkey on customers c  (cost=0.29..8.31 rows=1 width=18) (actual time=0.007..0.007 rows=1 loops=13)
+                           Index Cond: (customer_id = 1)
+                           Buffers: shared hit=41
+ Planning:
+   Buffers: shared hit=122
+ Planning Time: 0.466 ms
+ Execution Time: 22.409 ms
+(25 rows)
+
+Time: 23.774 ms
+== B 後台儀表板 訂單數與營收（server.py 第 326 行，自動更新每 2 秒一次）
+EXPLAIN (ANALYZE, BUFFERS) SELECT count(*) AS orders,coalesce(sum(amount),0) AS revenue FROM orders;
+                                                                QUERY PLAN                                                                
+------------------------------------------------------------------------------------------------------------------------------------------
+ Finalize Aggregate  (cost=14630.32..14630.33 rows=1 width=40) (actual time=50.490..54.259 rows=1 loops=1)
+   Buffers: shared hit=3501 read=3874
+   ->  Gather  (cost=14630.09..14630.30 rows=2 width=40) (actual time=50.395..54.249 rows=3 loops=1)
+         Workers Planned: 2
+         Workers Launched: 2
+         Buffers: shared hit=3501 read=3874
+         ->  Partial Aggregate  (cost=13630.09..13630.10 rows=1 width=40) (actual time=48.326..48.327 rows=1 loops=3)
+               Buffers: shared hit=3501 read=3874
+               ->  Parallel Seq Scan on orders  (cost=0.00..11545.06 rows=417006 width=6) (actual time=0.017..19.545 rows=333334 loops=3)
+                     Buffers: shared hit=3501 read=3874
+ Planning:
+   Buffers: shared hit=27
+ Planning Time: 0.089 ms
+ Execution Time: 54.294 ms
+(14 rows)
+
+Time: 54.705 ms
+== C 後台商品頁「已售」（server.py 第 166 行）
+EXPLAIN (ANALYZE, BUFFERS) SELECT i.product_id, sum(i.quantity)::bigint FROM orders o JOIN order_items i USING (order_id) WHERE o.status = 'pending' AND i.product_id = ANY(ARRAY[1,2,3,4,5,6,7,8,9,10,11,12]) GROUP BY 1;
+                                                                     QUERY PLAN                                                                     
+----------------------------------------------------------------------------------------------------------------------------------------------------
+ GroupAggregate  (cost=13597.95..13597.97 rows=1 width=12) (actual time=22.957..26.428 rows=2 loops=1)
+   Group Key: i.product_id
+   Buffers: shared hit=3605 read=3778
+   ->  Sort  (cost=13597.95..13597.95 rows=1 width=8) (actual time=22.953..26.423 rows=2 loops=1)
+         Sort Key: i.product_id
+         Sort Method: quicksort  Memory: 25kB
+         Buffers: shared hit=3605 read=3778
+         ->  Nested Loop  (cost=1000.46..13597.94 rows=1 width=8) (actual time=22.940..26.414 rows=2 loops=1)
+               Buffers: shared hit=3605 read=3778
+               ->  Gather  (cost=1000.00..13587.67 rows=1 width=4) (actual time=22.883..26.352 rows=2 loops=1)
+                     Workers Planned: 2
+                     Workers Launched: 2
+                     Buffers: shared hit=3597 read=3778
+                     ->  Parallel Seq Scan on orders o  (cost=0.00..12587.57 rows=1 width=4) (actual time=20.842..20.843 rows=1 loops=3)
+                           Filter: (status = 'pending'::text)
+                           Rows Removed by Filter: 333333
+                           Buffers: shared hit=3597 read=3778
+               ->  Index Scan using order_items_pkey on order_items i  (cost=0.46..10.25 rows=1 width=12) (actual time=0.027..0.027 rows=1 loops=2)
+                     Index Cond: (order_id = o.order_id)
+                     Filter: (product_id = ANY ('{1,2,3,4,5,6,7,8,9,10,11,12}'::integer[]))
+                     Buffers: shared hit=8
+ Planning:
+   Buffers: shared hit=78
+ Planning Time: 0.349 ms
+ Execution Time: 26.477 ms
+(25 rows)
+
+Time: 27.261 ms
+== D 前台商品搜尋 ILIKE
+EXPLAIN (ANALYZE, BUFFERS) SELECT * FROM products p WHERE ('book'='' OR name ILIKE '%'||'book'||'%' OR product_id::text='book') AND (''='' OR category='') ORDER BY product_id LIMIT 12 OFFSET 0;
+                                                    QUERY PLAN                                                     
+-------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=609.06..609.07 rows=5 width=38) (actual time=0.834..0.834 rows=0 loops=1)
+   Buffers: shared hit=589
+   ->  Sort  (cost=609.06..609.07 rows=5 width=38) (actual time=0.833..0.834 rows=0 loops=1)
+         Sort Key: product_id
+         Sort Method: quicksort  Memory: 25kB
+         Buffers: shared hit=589
+         ->  Seq Scan on products p  (cost=0.00..609.00 rows=5 width=38) (actual time=0.830..0.830 rows=0 loops=1)
+               Filter: ((name ~~* '%book%'::text) OR ((product_id)::text = 'book'::text))
+               Rows Removed by Filter: 1000
+               Buffers: shared hit=589
+ Planning:
+   Buffers: shared hit=40
+ Planning Time: 0.203 ms
+ Execution Time: 0.845 ms
+(14 rows)
+
+Time: 1.614 ms

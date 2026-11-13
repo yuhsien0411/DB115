@@ -1,0 +1,13 @@
+pgbench (16.15 (Ubuntu 16.15-0ubuntu0.24.04.1))
+transaction type: /workspace/project/pg/pg_uniform1000.sql
+scaling factor: 1
+query mode: simple
+number of clients: 20
+number of threads: 16
+maximum number of tries: 1
+duration: 3 s
+number of transactions actually processed: 39961
+number of failed transactions: 0 (0.000%)
+latency average = 1.498 ms
+initial connection time = 26.507 ms
+tps = 13354.146031 (without initial connection time)

@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.devcontainer/
+.vscode/
+
+# Raw benchmark output (~1.2 GB) — keep summaries, csv, json, md
+project/results/**/pgbench_log*
+project/results/**/*.bin
+
+# Homework folder
+HW/
+pdf/
+review/
+# Office lock files
+~$*
+
+project/.layout_qa/
+project/docs/

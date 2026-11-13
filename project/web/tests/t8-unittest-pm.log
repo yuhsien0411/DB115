@@ -1,0 +1,93 @@
+test_admin_inventory_filters_sort_and_sold (test_store.CheckoutTests.test_admin_inventory_filters_sort_and_sold) ... ok
+test_checkout_snapshots_integer_price_and_deducts_stock (test_store.CheckoutTests.test_checkout_snapshots_integer_price_and_deducts_stock) ... ok
+test_competing_checkouts_do_not_oversell (test_store.CheckoutTests.test_competing_checkouts_do_not_oversell) ... ok
+test_concurrent_duplicate_request_creates_one_order (test_store.CheckoutTests.test_concurrent_duplicate_request_creates_one_order) ... ok
+test_http_token_cookie_and_removed_routes (test_store.CheckoutTests.test_http_token_cookie_and_removed_routes) ... HTTP GET /api/admin/bootstrap
+HTTP POST /api/admin/bootstrap
+HTTP PUT /api/admin/bootstrap
+HTTP DELETE /api/admin/bootstrap
+HTTP PATCH /api/admin/bootstrap
+HTTP OPTIONS /api/admin/bootstrap
+HTTP HEAD /api/admin/bootstrap
+HTTP GET /api/admin/products
+HTTP POST /api/admin/products
+HTTP PUT /api/admin/products
+HTTP DELETE /api/admin/products
+HTTP PATCH /api/admin/products
+HTTP OPTIONS /api/admin/products
+HTTP HEAD /api/admin/products
+HTTP GET /api/admin/orders
+HTTP POST /api/admin/orders
+HTTP PUT /api/admin/orders
+HTTP DELETE /api/admin/orders
+HTTP PATCH /api/admin/orders
+HTTP OPTIONS /api/admin/orders
+HTTP HEAD /api/admin/orders
+HTTP GET /api/admin/orders/1
+HTTP POST /api/admin/orders/1
+HTTP PUT /api/admin/orders/1
+HTTP DELETE /api/admin/orders/1
+HTTP PATCH /api/admin/orders/1
+HTTP OPTIONS /api/admin/orders/1
+HTTP HEAD /api/admin/orders/1
+HTTP GET /api/admin/dashboard
+HTTP POST /api/admin/dashboard
+HTTP PUT /api/admin/dashboard
+HTTP DELETE /api/admin/dashboard
+HTTP PATCH /api/admin/dashboard
+HTTP OPTIONS /api/admin/dashboard
+HTTP HEAD /api/admin/dashboard
+HTTP GET /api/admin/experiments
+HTTP POST /api/admin/experiments
+HTTP PUT /api/admin/experiments
+HTTP DELETE /api/admin/experiments
+HTTP PATCH /api/admin/experiments
+HTTP OPTIONS /api/admin/experiments
+HTTP HEAD /api/admin/experiments
+HTTP GET /api/admin/unknown
+HTTP POST /api/admin/unknown
+HTTP PUT /api/admin/unknown
+HTTP DELETE /api/admin/unknown
+HTTP PATCH /api/admin/unknown
+HTTP OPTIONS /api/admin/unknown
+HTTP HEAD /api/admin/unknown
+HTTP GET /admin/
+HTTP GET /admin/admin.js
+HTTP GET /api/admin/dashboard
+HTTP GET /api/admin/dashboard
+HTTP GET /admin/
+HTTP GET /admin/
+HTTP GET /admin/
+HTTP GET /admin/admin.js
+HTTP GET /api/admin/bootstrap
+HTTP GET /api/admin/products
+HTTP GET /api/admin/orders
+HTTP GET /api/admin/dashboard
+HTTP GET /api/admin/experiments
+HTTP GET /
+HTTP GET /api/dashboard
+HTTP GET /api/products
+HTTP GET /api/orders
+HTTP GET /api/experiments
+HTTP GET /app.js
+HTTP GET /style.css
+HTTP GET /index.html
+HTTP GET /api/store/products
+HTTP POST /api/store/orders
+HTTP POST /api/store/orders
+HTTP POST /api/store/orders
+HTTP POST /api/store/orders
+HTTP POST /api/store/orders
+ok
+test_insufficient_stock_rolls_back_entire_cart (test_store.CheckoutTests.test_insufficient_stock_rolls_back_entire_cart) ... ok
+test_missing_product_and_invalid_quantities_rejected (test_store.CheckoutTests.test_missing_product_and_invalid_quantities_rejected) ... ok
+test_only_one_counter_mode_per_demo_schema (test_store.CheckoutTests.test_only_one_counter_mode_per_demo_schema) ... ok
+test_product_read_does_not_count_view (test_store.CheckoutTests.test_product_read_does_not_count_view) ... ok
+test_redis_flush_and_missing_key_stop (test_store.CheckoutTests.test_redis_flush_and_missing_key_stop) ... ok
+test_runtime_role_and_price_update_denied (test_store.CheckoutTests.test_runtime_role_and_price_update_denied) ... ok
+test_store_api_excludes_admin_fields_and_scopes_orders (test_store.CheckoutTests.test_store_api_excludes_admin_fields_and_scopes_orders) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 4.824s
+
+OK

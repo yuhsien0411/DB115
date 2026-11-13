@@ -1,0 +1,1 @@
+run_id,repeat,failed_component,redis_persistence,flush_interval_s,last_flush_commit_at,crash_at,actual_exposure_s,baseline_B0,acknowledged_N,failed_ops,unknown_ops,pg_increment_P,pg_gap_N_minus_P,redis_recovered_count,pg_increment_after_recovery,net_gap_after_recovery,raw_log_path,notes

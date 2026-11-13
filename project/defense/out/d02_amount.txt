@@ -1,0 +1,35 @@
+Timing is on.
+SELECT o.status, count(*) AS 訂單數,
+       count(*) FILTER (WHERE o.amount = s.line_sum) AS 相等,
+       count(*) FILTER (WHERE o.amount <> s.line_sum) AS 不相等
+FROM orders o
+JOIN (SELECT order_id, sum(quantity * unit_price) AS line_sum FROM order_items GROUP BY 1) s USING (order_id)
+GROUP BY o.status ORDER BY 1;
+  status   | 訂單數 | 相等 | 不相等 
+-----------+--------+------+--------
+ cancelled |  30005 |    0 |  30005
+ completed | 899754 |    1 | 899753
+ pending   |      2 |    2 |      0
+ shipped   |  70241 |    1 |  70240
+(4 rows)
+
+Time: 1176.317 ms (00:01.176)
+SELECT o.order_id, o.status, o.amount, sum(i.quantity * i.unit_price) AS 明細加總
+FROM orders o JOIN order_items i USING (order_id)
+WHERE o.order_id IN (1, (SELECT max(order_id) FROM orders WHERE status='pending'))
+GROUP BY 1,2,3 ORDER BY 1;
+ order_id |  status   | amount  | 明細加總 
+----------+-----------+---------+----------
+        1 | completed | 3279.99 |  4807.26
+  1000407 | pending   | 3127.30 |  3127.30
+(2 rows)
+
+Time: 38.647 ms
+SELECT run_id, count(DISTINCT flushed_at) AS 回寫次數, min(flushed_at), max(flushed_at)
+FROM view_flush_log WHERE run_id = 'redis_hot80_c200_r1_20261106161005' GROUP BY 1;
+               run_id               | 回寫次數 |              min              |              max              
+------------------------------------+----------+-------------------------------+-------------------------------
+ redis_hot80_c200_r1_20261106161005 |    19000 | 2026-11-06 16:10:10.829431+00 | 2026-11-06 16:11:40.077314+00
+(1 row)
+
+Time: 3.995 ms

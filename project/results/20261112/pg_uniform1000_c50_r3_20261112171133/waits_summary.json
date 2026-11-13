@@ -1,0 +1,30 @@
+{
+ "samples": 600,
+ "every_s": 0.1,
+ "actual_every_s": 0.1,
+ "share_samples_with_lock": 0.655,
+ "share_active_backends_on_lock": 0.023,
+ "max_client_connections_seen": 50,
+ "by_event_backend_samples": {
+  "LWLock:WALWrite": 24448,
+  "none:none": 1389,
+  "Client:ClientRead": 787,
+  "Lock:transactionid": 636,
+  "IO:WALSync": 571,
+  "Timeout:SpinDelay": 40,
+  "LWLock:WALInsert": 39,
+  "LWLock:XidGen": 31,
+  "IPC:ProcArrayGroupUpdate": 20,
+  "LWLock:LockManager": 11,
+  "Lock:tuple": 9,
+  "IO:WALWrite": 8,
+  "LWLock:ProcArray": 7,
+  "IPC:XactGroupUpdate": 5,
+  "LWLock:BufferContent": 2,
+  "LWLock:XactSLRU": 1
+ },
+ "definitions": {
+  "share_samples_with_lock": "至少有一個 active 連線在等 Lock 類事件的取樣次數 ÷ 總取樣次數",
+  "share_active_backends_on_lock": "所有取樣中，等 Lock 類事件的連線數總和 ÷ active 連線數總和（提案判準 2 採用此項）"
+ }
+}

@@ -1,0 +1,31 @@
+{
+ "run_id": "crash_hot80_c200_T1_r3_20261112172612",
+ "backend": "redis",
+ "scenario": "hot80",
+ "concurrency": 200,
+ "procs": 8,
+ "seed": 1,
+ "warmup_s": 0.0,
+ "measured_s": 80.0,
+ "t_start": 1794504376.3199327,
+ "t_measure_start": 1794504376.3199327,
+ "t_measure_end": 1794504456.3199327,
+ "ack_log": true,
+ "successful_ops": 1033216,
+ "successful_ops_warmup": 0,
+ "successful_ops_total": 1033216,
+ "error_ops": 200,
+ "unknown_ops": 0,
+ "error_ops_warmup": 0,
+ "unknown_ops_warmup": 0,
+ "errors": {
+  "ConnectionError": 200
+ },
+ "success_ops_per_s": 12915.2,
+ "p95_ms": 3.168,
+ "latency_samples": 1033216,
+ "hot_share_actual": 0.8001,
+ "worker_exitcodes_nonzero": [],
+ "late_start_s": 0.0,
+ "valid": true
+}

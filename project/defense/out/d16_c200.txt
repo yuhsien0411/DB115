@@ -1,0 +1,3 @@
+hot80、200 併發
+  synchronous_commit=on （預設）               3,912 tx/s   p50   15.07 ms   p95  219.67 ms
+  synchronous_commit=off                  27,121 tx/s   p50    2.47 ms   p95   28.86 ms

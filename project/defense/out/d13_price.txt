@@ -1,0 +1,8 @@
+(a) 下單交易 order_tx（hot80，1–3 品項），防超賣的行鎖
+  place_order        （有 FOR UPDATE，正本）             1,545 tx/s   p50    3.82 ms   p95  182.24 ms
+  place_order_nolock （拿掉 FOR UPDATE，會超賣）             145 tx/s   p50  163.72 ms   p95 1364.70 ms
+(b) 瀏覽計數 UPDATE +1，持久性
+  uniform1000  synchronous_commit=on （預設）         30,598 tx/s   p50    1.44 ms   p95    2.46 ms
+  uniform1000  synchronous_commit=off             95,159 tx/s   p50    0.40 ms   p95    1.05 ms
+  hot80        synchronous_commit=on （預設）          4,600 tx/s   p50    4.08 ms   p95   41.55 ms
+  hot80        synchronous_commit=off             65,057 tx/s   p50    0.46 ms   p95    2.20 ms

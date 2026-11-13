@@ -1,0 +1,281 @@
+test_admin_inventory_filters_sort_and_sold (test_store.CheckoutTests.test_admin_inventory_filters_sort_and_sold) ... ERROR
+test_checkout_snapshots_integer_price_and_deducts_stock (test_store.CheckoutTests.test_checkout_snapshots_integer_price_and_deducts_stock) ... ERROR
+test_competing_checkouts_do_not_oversell (test_store.CheckoutTests.test_competing_checkouts_do_not_oversell) ... ERROR
+test_concurrent_duplicate_request_creates_one_order (test_store.CheckoutTests.test_concurrent_duplicate_request_creates_one_order) ... ERROR
+test_http_token_cookie_and_removed_routes (test_store.CheckoutTests.test_http_token_cookie_and_removed_routes) ... ERROR
+test_insufficient_stock_rolls_back_entire_cart (test_store.CheckoutTests.test_insufficient_stock_rolls_back_entire_cart) ... ERROR
+test_missing_product_and_invalid_quantities_rejected (test_store.CheckoutTests.test_missing_product_and_invalid_quantities_rejected) ... ERROR
+test_only_one_counter_mode_per_demo_schema (test_store.CheckoutTests.test_only_one_counter_mode_per_demo_schema) ... ERROR
+test_product_read_does_not_count_view (test_store.CheckoutTests.test_product_read_does_not_count_view) ... ERROR
+test_redis_flush_and_missing_key_stop (test_store.CheckoutTests.test_redis_flush_and_missing_key_stop) ... ERROR
+test_runtime_role_and_price_update_denied (test_store.CheckoutTests.test_runtime_role_and_price_update_denied) ... ERROR
+test_store_api_excludes_admin_fields_and_scopes_orders (test_store.CheckoutTests.test_store_api_excludes_admin_fields_and_scopes_orders) ... ERROR
+
+======================================================================
+ERROR: test_admin_inventory_filters_sort_and_sold (test_store.CheckoutTests.test_admin_inventory_filters_sort_and_sold)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/unittest/async_case.py", line 87, in _callSetUp
+    self._callAsync(self.asyncSetUp)
+  File "/usr/lib/python3.12/unittest/async_case.py", line 104, in _callAsync
+    return self._asyncioRunner.run(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 687, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/workspace/project/web/tests/test_store.py", line 33, in asyncSetUp
+    await self.store.start()  # 同時防止和正常展示並行；此連線已是 q01_web。
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/project/web/server.py", line 68, in start
+    raise RuntimeError('此展示 schema 已有網站執行中，請先停止舊網站。')
+RuntimeError: 此展示 schema 已有網站執行中，請先停止舊網站。
+
+======================================================================
+ERROR: test_checkout_snapshots_integer_price_and_deducts_stock (test_store.CheckoutTests.test_checkout_snapshots_integer_price_and_deducts_stock)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/unittest/async_case.py", line 87, in _callSetUp
+    self._callAsync(self.asyncSetUp)
+  File "/usr/lib/python3.12/unittest/async_case.py", line 104, in _callAsync
+    return self._asyncioRunner.run(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 687, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/workspace/project/web/tests/test_store.py", line 33, in asyncSetUp
+    await self.store.start()  # 同時防止和正常展示並行；此連線已是 q01_web。
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/project/web/server.py", line 68, in start
+    raise RuntimeError('此展示 schema 已有網站執行中，請先停止舊網站。')
+RuntimeError: 此展示 schema 已有網站執行中，請先停止舊網站。
+
+======================================================================
+ERROR: test_competing_checkouts_do_not_oversell (test_store.CheckoutTests.test_competing_checkouts_do_not_oversell)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/unittest/async_case.py", line 87, in _callSetUp
+    self._callAsync(self.asyncSetUp)
+  File "/usr/lib/python3.12/unittest/async_case.py", line 104, in _callAsync
+    return self._asyncioRunner.run(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 687, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/workspace/project/web/tests/test_store.py", line 33, in asyncSetUp
+    await self.store.start()  # 同時防止和正常展示並行；此連線已是 q01_web。
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/project/web/server.py", line 68, in start
+    raise RuntimeError('此展示 schema 已有網站執行中，請先停止舊網站。')
+RuntimeError: 此展示 schema 已有網站執行中，請先停止舊網站。
+
+======================================================================
+ERROR: test_concurrent_duplicate_request_creates_one_order (test_store.CheckoutTests.test_concurrent_duplicate_request_creates_one_order)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/unittest/async_case.py", line 87, in _callSetUp
+    self._callAsync(self.asyncSetUp)
+  File "/usr/lib/python3.12/unittest/async_case.py", line 104, in _callAsync
+    return self._asyncioRunner.run(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 687, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/workspace/project/web/tests/test_store.py", line 33, in asyncSetUp
+    await self.store.start()  # 同時防止和正常展示並行；此連線已是 q01_web。
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/project/web/server.py", line 68, in start
+    raise RuntimeError('此展示 schema 已有網站執行中，請先停止舊網站。')
+RuntimeError: 此展示 schema 已有網站執行中，請先停止舊網站。
+
+======================================================================
+ERROR: test_http_token_cookie_and_removed_routes (test_store.CheckoutTests.test_http_token_cookie_and_removed_routes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/unittest/async_case.py", line 87, in _callSetUp
+    self._callAsync(self.asyncSetUp)
+  File "/usr/lib/python3.12/unittest/async_case.py", line 104, in _callAsync
+    return self._asyncioRunner.run(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 687, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/workspace/project/web/tests/test_store.py", line 33, in asyncSetUp
+    await self.store.start()  # 同時防止和正常展示並行；此連線已是 q01_web。
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/project/web/server.py", line 68, in start
+    raise RuntimeError('此展示 schema 已有網站執行中，請先停止舊網站。')
+RuntimeError: 此展示 schema 已有網站執行中，請先停止舊網站。
+
+======================================================================
+ERROR: test_insufficient_stock_rolls_back_entire_cart (test_store.CheckoutTests.test_insufficient_stock_rolls_back_entire_cart)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/unittest/async_case.py", line 87, in _callSetUp
+    self._callAsync(self.asyncSetUp)
+  File "/usr/lib/python3.12/unittest/async_case.py", line 104, in _callAsync
+    return self._asyncioRunner.run(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 687, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/workspace/project/web/tests/test_store.py", line 33, in asyncSetUp
+    await self.store.start()  # 同時防止和正常展示並行；此連線已是 q01_web。
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/project/web/server.py", line 68, in start
+    raise RuntimeError('此展示 schema 已有網站執行中，請先停止舊網站。')
+RuntimeError: 此展示 schema 已有網站執行中，請先停止舊網站。
+
+======================================================================
+ERROR: test_missing_product_and_invalid_quantities_rejected (test_store.CheckoutTests.test_missing_product_and_invalid_quantities_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/unittest/async_case.py", line 87, in _callSetUp
+    self._callAsync(self.asyncSetUp)
+  File "/usr/lib/python3.12/unittest/async_case.py", line 104, in _callAsync
+    return self._asyncioRunner.run(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 687, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/workspace/project/web/tests/test_store.py", line 33, in asyncSetUp
+    await self.store.start()  # 同時防止和正常展示並行；此連線已是 q01_web。
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/project/web/server.py", line 68, in start
+    raise RuntimeError('此展示 schema 已有網站執行中，請先停止舊網站。')
+RuntimeError: 此展示 schema 已有網站執行中，請先停止舊網站。
+
+======================================================================
+ERROR: test_only_one_counter_mode_per_demo_schema (test_store.CheckoutTests.test_only_one_counter_mode_per_demo_schema)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/unittest/async_case.py", line 87, in _callSetUp
+    self._callAsync(self.asyncSetUp)
+  File "/usr/lib/python3.12/unittest/async_case.py", line 104, in _callAsync
+    return self._asyncioRunner.run(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 687, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/workspace/project/web/tests/test_store.py", line 33, in asyncSetUp
+    await self.store.start()  # 同時防止和正常展示並行；此連線已是 q01_web。
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/project/web/server.py", line 68, in start
+    raise RuntimeError('此展示 schema 已有網站執行中，請先停止舊網站。')
+RuntimeError: 此展示 schema 已有網站執行中，請先停止舊網站。
+
+======================================================================
+ERROR: test_product_read_does_not_count_view (test_store.CheckoutTests.test_product_read_does_not_count_view)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/unittest/async_case.py", line 87, in _callSetUp
+    self._callAsync(self.asyncSetUp)
+  File "/usr/lib/python3.12/unittest/async_case.py", line 104, in _callAsync
+    return self._asyncioRunner.run(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 687, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/workspace/project/web/tests/test_store.py", line 33, in asyncSetUp
+    await self.store.start()  # 同時防止和正常展示並行；此連線已是 q01_web。
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/project/web/server.py", line 68, in start
+    raise RuntimeError('此展示 schema 已有網站執行中，請先停止舊網站。')
+RuntimeError: 此展示 schema 已有網站執行中，請先停止舊網站。
+
+======================================================================
+ERROR: test_redis_flush_and_missing_key_stop (test_store.CheckoutTests.test_redis_flush_and_missing_key_stop)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/unittest/async_case.py", line 87, in _callSetUp
+    self._callAsync(self.asyncSetUp)
+  File "/usr/lib/python3.12/unittest/async_case.py", line 104, in _callAsync
+    return self._asyncioRunner.run(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 687, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/workspace/project/web/tests/test_store.py", line 33, in asyncSetUp
+    await self.store.start()  # 同時防止和正常展示並行；此連線已是 q01_web。
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/project/web/server.py", line 68, in start
+    raise RuntimeError('此展示 schema 已有網站執行中，請先停止舊網站。')
+RuntimeError: 此展示 schema 已有網站執行中，請先停止舊網站。
+
+======================================================================
+ERROR: test_runtime_role_and_price_update_denied (test_store.CheckoutTests.test_runtime_role_and_price_update_denied)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/unittest/async_case.py", line 87, in _callSetUp
+    self._callAsync(self.asyncSetUp)
+  File "/usr/lib/python3.12/unittest/async_case.py", line 104, in _callAsync
+    return self._asyncioRunner.run(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 687, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/workspace/project/web/tests/test_store.py", line 33, in asyncSetUp
+    await self.store.start()  # 同時防止和正常展示並行；此連線已是 q01_web。
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/project/web/server.py", line 68, in start
+    raise RuntimeError('此展示 schema 已有網站執行中，請先停止舊網站。')
+RuntimeError: 此展示 schema 已有網站執行中，請先停止舊網站。
+
+======================================================================
+ERROR: test_store_api_excludes_admin_fields_and_scopes_orders (test_store.CheckoutTests.test_store_api_excludes_admin_fields_and_scopes_orders)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/unittest/async_case.py", line 87, in _callSetUp
+    self._callAsync(self.asyncSetUp)
+  File "/usr/lib/python3.12/unittest/async_case.py", line 104, in _callAsync
+    return self._asyncioRunner.run(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 687, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/workspace/project/web/tests/test_store.py", line 33, in asyncSetUp
+    await self.store.start()  # 同時防止和正常展示並行；此連線已是 q01_web。
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/project/web/server.py", line 68, in start
+    raise RuntimeError('此展示 schema 已有網站執行中，請先停止舊網站。')
+RuntimeError: 此展示 schema 已有網站執行中，請先停止舊網站。
+
+----------------------------------------------------------------------
+Ran 12 tests in 1.540s
+
+FAILED (errors=12)

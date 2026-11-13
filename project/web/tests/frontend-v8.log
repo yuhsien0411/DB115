@@ -1,0 +1,12 @@
+執行環境：functions.exec 既有 V8（容器無 Node／瀏覽器，未安裝套件）
+以 new Function 載入 tests/frontend.js 的 runFrontendChecks，傳入 common.js、store/store.js、admin/admin.js 的完整原始碼。
+前台 products 樣板通過
+前台 orders 樣板通過
+整數格式、顧客切換與延遲回應、詳情與購物車原請求重試通過
+後台 overview 樣板通過
+後台 products 樣板通過
+後台 orders 樣板通過
+後台 counter 樣板通過
+後台 experiments 樣板通過
+後台 requirements 樣板通過
+共 9 組檢查通過；簡化 DOM，不代表瀏覽器視覺與人工點擊驗收。

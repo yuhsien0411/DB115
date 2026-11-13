@@ -1,0 +1,14 @@
+== d13_order_tx_nolock.sql
+     73 Lock:transactionid
+     72 LWLock:BufferContent
+     58 LWLock:MultiXactMemberSLRU
+     21 LWLock:LockManager
+     19 CPU:-
+      4 LWLock:MultiXactMemberBuffer
+tps = 428.532924 (without initial connection time)
+== ../pg/order_tx.sql
+    210 Lock:tuple
+     32 Lock:transactionid
+      4 IO:WALSync
+      4 CPU:-
+tps = 1634.161743 (without initial connection time)

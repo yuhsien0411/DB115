@@ -1,0 +1,6 @@
+{"event": "worker_start", "run_id": "crash_hot80_c200_T5_r3_20261112172708", "interval_s": 5.0, "ts": 1794504429.370696}
+{"event": "flush", "final": false, "changed": 1000, "redis_sum": 2215189077, "snap_ts": 1794504434.376436, "ms": 43.76, "ts": 1794504434.420201}
+{"event": "flush", "final": false, "changed": 1000, "redis_sum": 2215664700, "snap_ts": 1794504439.376427, "ms": 38.5, "ts": 1794504439.414932}
+{"event": "flush", "final": false, "changed": 1000, "redis_sum": 2216131266, "snap_ts": 1794504444.376433, "ms": 36.1, "ts": 1794504444.412538}
+{"event": "redis_unreachable", "error": "ConnectionError", "final": true, "ts": 1794504448.866049}
+{"event": "worker_stop", "code": 0, "ts": 1794504448.866746}

@@ -1,0 +1,1 @@
+run_id,scenario,backend,concurrency,round,seed,products,hot_share_actual,flush_interval_s,warmup_s,measured_s,successful_ops,error_ops,unknown_ops,success_ops_per_s,p95_ms,latency_samples,pg_connections_actual,worker_flush_ms,worker_backlog,raw_log_path,summary_path,notes

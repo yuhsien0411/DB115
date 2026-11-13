@@ -1,0 +1,12 @@
+執行環境：functions.exec 既有 V8；載入 frontend.js 的 runFrontendChecks 與三份實際 JavaScript 原始碼，無套件安裝。
+前台 products 樣板通過
+前台 orders 樣板通過
+商品卡／詳情剩餘數、少量醒目、售完停用、購物車上限／手動夾值／持久化／最近瀏覽／舊項目相容通過
+整數格式、顧客切換與延遲回應、詳情與購物車原請求重試通過
+後台 overview 樣板通過
+後台 products 樣板通過
+後台 orders 樣板通過
+後台 counter 樣板通過
+後台 experiments 樣板通過
+後台 requirements 樣板通過
+結果：10 組檢查全部通過；簡化 DOM 不取代實際瀏覽器驗收。

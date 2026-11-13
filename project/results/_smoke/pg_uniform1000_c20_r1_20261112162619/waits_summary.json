@@ -1,0 +1,20 @@
+{
+ "samples": 29,
+ "every_s": 0.1,
+ "actual_every_s": 0.1,
+ "share_samples_with_lock": 0.2069,
+ "share_active_backends_on_lock": 0.0109,
+ "max_client_connections_seen": 20,
+ "by_event_backend_samples": {
+  "LWLock:WALWrite": 466,
+  "none:none": 31,
+  "IO:WALSync": 27,
+  "Client:ClientRead": 20,
+  "Lock:transactionid": 6,
+  "LWLock:WALInsert": 1
+ },
+ "definitions": {
+  "share_samples_with_lock": "至少有一個 active 連線在等 Lock 類事件的取樣次數 ÷ 總取樣次數",
+  "share_active_backends_on_lock": "所有取樣中，等 Lock 類事件的連線數總和 ÷ active 連線數總和（提案判準 2 採用此項）"
+ }
+}

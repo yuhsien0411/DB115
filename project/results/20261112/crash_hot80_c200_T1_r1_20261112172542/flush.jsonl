@@ -1,0 +1,17 @@
+{"event": "worker_start", "run_id": "crash_hot80_c200_T1_r1_20261112172542", "interval_s": 1.0, "ts": 1794504343.272485}
+{"event": "flush", "final": false, "changed": 0, "redis_sum": 2209858811, "snap_ts": 1794504344.274282, "ms": 14.26, "ts": 1794504344.288547}
+{"event": "flush", "final": false, "changed": 0, "redis_sum": 2209858811, "snap_ts": 1794504345.274448, "ms": 6.96, "ts": 1794504345.28141}
+{"event": "flush", "final": false, "changed": 719, "redis_sum": 2209865421, "snap_ts": 1794504346.274228, "ms": 27.43, "ts": 1794504346.301665}
+{"event": "flush", "final": false, "changed": 1000, "redis_sum": 2209957766, "snap_ts": 1794504347.274026, "ms": 26.42, "ts": 1794504347.300448}
+{"event": "flush", "final": false, "changed": 1000, "redis_sum": 2210055566, "snap_ts": 1794504348.274288, "ms": 33.07, "ts": 1794504348.307366}
+{"event": "flush", "final": false, "changed": 1000, "redis_sum": 2210151578, "snap_ts": 1794504349.274203, "ms": 42.67, "ts": 1794504349.31689}
+{"event": "flush", "final": false, "changed": 1000, "redis_sum": 2210251728, "snap_ts": 1794504350.275681, "ms": 32.31, "ts": 1794504350.307999}
+{"event": "flush", "final": false, "changed": 1000, "redis_sum": 2210345868, "snap_ts": 1794504351.27405, "ms": 31.01, "ts": 1794504351.305063}
+{"event": "flush", "final": false, "changed": 1000, "redis_sum": 2210444278, "snap_ts": 1794504352.274052, "ms": 46.97, "ts": 1794504352.321027}
+{"event": "flush", "final": false, "changed": 1000, "redis_sum": 2210540655, "snap_ts": 1794504353.275779, "ms": 50.94, "ts": 1794504353.326721}
+{"event": "flush", "final": false, "changed": 1000, "redis_sum": 2210636363, "snap_ts": 1794504354.275603, "ms": 29.3, "ts": 1794504354.304911}
+{"event": "flush", "final": false, "changed": 1000, "redis_sum": 2210734364, "snap_ts": 1794504355.27472, "ms": 31.84, "ts": 1794504355.306562}
+{"event": "flush", "final": false, "changed": 1000, "redis_sum": 2210826893, "snap_ts": 1794504356.274063, "ms": 36.97, "ts": 1794504356.311042}
+{"event": "redis_unreachable", "error": "ConnectionError", "final": false, "ts": 1794504357.27502}
+{"event": "redis_unreachable", "error": "ConnectionError", "final": true, "ts": 1794504357.445954}
+{"event": "worker_stop", "code": 0, "ts": 1794504357.446572}

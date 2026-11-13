@@ -1,0 +1,61 @@
+UPDATE products SET stock = 1000000;
+UPDATE 1000
+SELECT count(place_order((random()*49999)::int + 1, ARRAY[(random()*999)::int + 1], ARRAY[1]))
+FROM generate_series(1, 5000);
+ count 
+-------
+  5000
+(1 row)
+
+== ANALYZE 之前
+EXPLAIN (ANALYZE) SELECT i.product_id, sum(i.quantity)::bigint FROM orders o JOIN order_items i USING (order_id)
+WHERE o.status = 'pending' GROUP BY 1;
+                                                                      QUERY PLAN                                                                       
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+ GroupAggregate  (cost=13659.36..13659.40 rows=2 width=12) (actual time=28.303..29.101 rows=995 loops=1)
+   Group Key: i.product_id
+   ->  Sort  (cost=13659.36..13659.37 rows=2 width=8) (actual time=28.297..28.653 rows=5002 loops=1)
+         Sort Key: i.product_id
+         Sort Method: quicksort  Memory: 349kB
+         ->  Nested Loop  (cost=1000.43..13659.35 rows=2 width=8) (actual time=21.882..27.621 rows=5002 loops=1)
+               ->  Gather  (cost=1000.00..13649.12 rows=1 width=4) (actual time=21.856..22.243 rows=5002 loops=1)
+                     Workers Planned: 2
+                     Workers Launched: 2
+                     ->  Parallel Seq Scan on orders o  (cost=0.00..12649.02 rows=1 width=4) (actual time=18.811..18.993 rows=1667 loops=3)
+                           Filter: (status = 'pending'::text)
+                           Rows Removed by Filter: 333333
+               ->  Index Scan using order_items_pkey on order_items i  (cost=0.43..10.21 rows=2 width=12) (actual time=0.001..0.001 rows=1 loops=5002)
+                     Index Cond: (order_id = o.order_id)
+ Planning Time: 0.270 ms
+ Execution Time: 29.181 ms
+(16 rows)
+
+ANALYZE orders;
+ANALYZE
+== ANALYZE 之後
+EXPLAIN (ANALYZE) SELECT i.product_id, sum(i.quantity)::bigint FROM orders o JOIN order_items i USING (order_id)
+WHERE o.status = 'pending' GROUP BY 1;
+                                                                            QUERY PLAN                                                                            
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Finalize GroupAggregate  (cost=28163.24..28451.23 rows=1000 width=12) (actual time=23.468..25.597 rows=995 loops=1)
+   Group Key: i.product_id
+   ->  Gather Merge  (cost=28163.24..28431.23 rows=2000 width=12) (actual time=23.463..25.355 rows=2446 loops=1)
+         Workers Planned: 2
+         Workers Launched: 2
+         ->  Partial GroupAggregate  (cost=27163.22..27200.36 rows=1000 width=12) (actual time=20.753..21.033 rows=815 loops=3)
+               Group Key: i.product_id
+               ->  Sort  (cost=27163.22..27172.27 rows=3619 width=8) (actual time=20.749..20.822 rows=1667 loops=3)
+                     Sort Key: i.product_id
+                     Sort Method: quicksort  Memory: 103kB
+                     Worker 0:  Sort Method: quicksort  Memory: 100kB
+                     Worker 1:  Sort Method: quicksort  Memory: 100kB
+                     ->  Nested Loop  (cost=0.43..26949.31 rows=3619 width=8) (actual time=18.527..20.489 rows=1667 loops=3)
+                           ->  Parallel Seq Scan on orders o  (cost=0.00..12645.39 rows=1815 width=4) (actual time=18.506..18.680 rows=1667 loops=3)
+                                 Filter: (status = 'pending'::text)
+                                 Rows Removed by Filter: 333333
+                           ->  Index Scan using order_items_pkey on order_items i  (cost=0.43..7.86 rows=2 width=12) (actual time=0.001..0.001 rows=1 loops=5002)
+                                 Index Cond: (order_id = o.order_id)
+ Planning Time: 0.232 ms
+ Execution Time: 25.656 ms
+(20 rows)
+

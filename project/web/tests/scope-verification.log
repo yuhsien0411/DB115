@@ -1,0 +1,4 @@
+範圍核對：project/web/** 與允許文件以外，100 個非 log 專案檔案 SHA-256 前後相同。
+自動產生／持續記錄的任務 .log 不納入此子集核對，完整 /workspace 快照由 PM 依派工單比對。
+未使用 git、未安裝套件、未修改 security／角色／授權／public 資料。
+最終 q01_web 連線 0、advisory lock 0、測試 fixture 0；網站程序已停止。

@@ -1,0 +1,94 @@
+[OK] 殘留的實驗行程或網站：0 個
+[OK] PostgreSQL 其他 client 連線：0 條
+[OK] Redis 其他 client 連線：0 條
+[OK] PostgreSQL 名額：需要 500（取樣器另 1 條），max_connections=500；取樣器會自動關閉（D21）
+[OK] Redis 名額：需要 500，maxclients=10000
+[OK] 檔案描述元上限（ulimit -n）：1048576，至少需要 756
+全部通過，可以開始壓測。
+[2026-11-12 16:29:18] 開始：rounds=[1 2 3] concurrency=[50 200 500] scenarios=[hot80 uniform1000] backends=[pg redis] T=5 crash_T=[1 5]x3
+[2026-11-12 16:29:18] RUN [1/42] python3 run_cell.py --backend pg --scenario hot80 --concurrency 50 --round 1 --results results/20261112
+[2026-11-12 16:30:49] EXIT 0 [1/42] 完成 2%  python3 run_cell.py --backend pg --scenario hot80 --concurrency 50 --round 1 --results results/20261112
+[2026-11-12 16:30:49] RUN [2/42] python3 run_cell.py --backend redis --scenario hot80 --concurrency 50 --round 1 --interval 5 --results results/20261112
+[2026-11-12 16:32:24] EXIT 0 [2/42] 完成 4%  python3 run_cell.py --backend redis --scenario hot80 --concurrency 50 --round 1 --interval 5 --results results/20261112
+[2026-11-12 16:32:24] RUN [3/42] python3 run_cell.py --backend redis --scenario uniform1000 --concurrency 50 --round 1 --interval 5 --results results/20261112
+[2026-11-12 16:33:58] EXIT 0 [3/42] 完成 7%  python3 run_cell.py --backend redis --scenario uniform1000 --concurrency 50 --round 1 --interval 5 --results results/20261112
+[2026-11-12 16:33:58] RUN [4/42] python3 run_cell.py --backend pg --scenario uniform1000 --concurrency 50 --round 1 --results results/20261112
+[2026-11-12 16:35:31] EXIT 0 [4/42] 完成 9%  python3 run_cell.py --backend pg --scenario uniform1000 --concurrency 50 --round 1 --results results/20261112
+[2026-11-12 16:35:31] RUN [5/42] python3 run_cell.py --backend pg --scenario hot80 --concurrency 200 --round 1 --results results/20261112
+[2026-11-12 16:37:03] EXIT 0 [5/42] 完成 11%  python3 run_cell.py --backend pg --scenario hot80 --concurrency 200 --round 1 --results results/20261112
+[2026-11-12 16:37:03] RUN [6/42] python3 run_cell.py --backend redis --scenario hot80 --concurrency 200 --round 1 --interval 5 --results results/20261112
+[2026-11-12 16:38:37] EXIT 0 [6/42] 完成 14%  python3 run_cell.py --backend redis --scenario hot80 --concurrency 200 --round 1 --interval 5 --results results/20261112
+[2026-11-12 16:38:37] RUN [7/42] python3 run_cell.py --backend redis --scenario uniform1000 --concurrency 200 --round 1 --interval 5 --results results/20261112
+[2026-11-12 16:40:12] EXIT 0 [7/42] 完成 16%  python3 run_cell.py --backend redis --scenario uniform1000 --concurrency 200 --round 1 --interval 5 --results results/20261112
+[2026-11-12 16:40:12] RUN [8/42] python3 run_cell.py --backend pg --scenario uniform1000 --concurrency 200 --round 1 --results results/20261112
+[2026-11-12 16:41:47] EXIT 0 [8/42] 完成 19%  python3 run_cell.py --backend pg --scenario uniform1000 --concurrency 200 --round 1 --results results/20261112
+[2026-11-12 16:41:47] RUN [9/42] python3 run_cell.py --backend pg --scenario hot80 --concurrency 500 --round 1 --results results/20261112
+[2026-11-12 16:43:19] EXIT 0 [9/42] 完成 21%  python3 run_cell.py --backend pg --scenario hot80 --concurrency 500 --round 1 --results results/20261112
+[2026-11-12 16:43:19] RUN [10/42] python3 run_cell.py --backend redis --scenario hot80 --concurrency 500 --round 1 --interval 5 --results results/20261112
+[2026-11-12 16:44:55] EXIT 0 [10/42] 完成 23%  python3 run_cell.py --backend redis --scenario hot80 --concurrency 500 --round 1 --interval 5 --results results/20261112
+[2026-11-12 16:44:55] RUN [11/42] python3 run_cell.py --backend redis --scenario uniform1000 --concurrency 500 --round 1 --interval 5 --results results/20261112
+[2026-11-12 16:46:31] EXIT 0 [11/42] 完成 26%  python3 run_cell.py --backend redis --scenario uniform1000 --concurrency 500 --round 1 --interval 5 --results results/20261112
+[2026-11-12 16:46:31] RUN [12/42] python3 run_cell.py --backend pg --scenario uniform1000 --concurrency 500 --round 1 --results results/20261112
+[2026-11-12 16:48:06] EXIT 0 [12/42] 完成 28%  python3 run_cell.py --backend pg --scenario uniform1000 --concurrency 500 --round 1 --results results/20261112
+[2026-11-12 16:48:07] RUN [13/42] python3 run_cell.py --backend pg --scenario hot80 --concurrency 50 --round 2 --results results/20261112
+[2026-11-12 16:49:38] EXIT 0 [13/42] 完成 30%  python3 run_cell.py --backend pg --scenario hot80 --concurrency 50 --round 2 --results results/20261112
+[2026-11-12 16:49:38] RUN [14/42] python3 run_cell.py --backend redis --scenario hot80 --concurrency 50 --round 2 --interval 5 --results results/20261112
+[2026-11-12 16:51:12] EXIT 0 [14/42] 完成 33%  python3 run_cell.py --backend redis --scenario hot80 --concurrency 50 --round 2 --interval 5 --results results/20261112
+[2026-11-12 16:51:12] RUN [15/42] python3 run_cell.py --backend redis --scenario uniform1000 --concurrency 50 --round 2 --interval 5 --results results/20261112
+[2026-11-12 16:52:46] EXIT 0 [15/42] 完成 35%  python3 run_cell.py --backend redis --scenario uniform1000 --concurrency 50 --round 2 --interval 5 --results results/20261112
+[2026-11-12 16:52:46] RUN [16/42] python3 run_cell.py --backend pg --scenario uniform1000 --concurrency 50 --round 2 --results results/20261112
+[2026-11-12 16:54:19] EXIT 0 [16/42] 完成 38%  python3 run_cell.py --backend pg --scenario uniform1000 --concurrency 50 --round 2 --results results/20261112
+[2026-11-12 16:54:19] RUN [17/42] python3 run_cell.py --backend pg --scenario hot80 --concurrency 200 --round 2 --results results/20261112
+[2026-11-12 16:55:51] EXIT 0 [17/42] 完成 40%  python3 run_cell.py --backend pg --scenario hot80 --concurrency 200 --round 2 --results results/20261112
+[2026-11-12 16:55:51] RUN [18/42] python3 run_cell.py --backend redis --scenario hot80 --concurrency 200 --round 2 --interval 5 --results results/20261112
+[2026-11-12 16:57:25] EXIT 0 [18/42] 完成 42%  python3 run_cell.py --backend redis --scenario hot80 --concurrency 200 --round 2 --interval 5 --results results/20261112
+[2026-11-12 16:57:25] RUN [19/42] python3 run_cell.py --backend redis --scenario uniform1000 --concurrency 200 --round 2 --interval 5 --results results/20261112
+[2026-11-12 16:59:00] EXIT 0 [19/42] 完成 45%  python3 run_cell.py --backend redis --scenario uniform1000 --concurrency 200 --round 2 --interval 5 --results results/20261112
+[2026-11-12 16:59:00] RUN [20/42] python3 run_cell.py --backend pg --scenario uniform1000 --concurrency 200 --round 2 --results results/20261112
+[2026-11-12 17:00:35] EXIT 0 [20/42] 完成 47%  python3 run_cell.py --backend pg --scenario uniform1000 --concurrency 200 --round 2 --results results/20261112
+[2026-11-12 17:00:35] RUN [21/42] python3 run_cell.py --backend pg --scenario hot80 --concurrency 500 --round 2 --results results/20261112
+[2026-11-12 17:02:07] EXIT 0 [21/42] 完成 50%  python3 run_cell.py --backend pg --scenario hot80 --concurrency 500 --round 2 --results results/20261112
+[2026-11-12 17:02:07] RUN [22/42] python3 run_cell.py --backend redis --scenario hot80 --concurrency 500 --round 2 --interval 5 --results results/20261112
+[2026-11-12 17:03:43] EXIT 0 [22/42] 完成 52%  python3 run_cell.py --backend redis --scenario hot80 --concurrency 500 --round 2 --interval 5 --results results/20261112
+[2026-11-12 17:03:43] RUN [23/42] python3 run_cell.py --backend redis --scenario uniform1000 --concurrency 500 --round 2 --interval 5 --results results/20261112
+[2026-11-12 17:05:19] EXIT 0 [23/42] 完成 54%  python3 run_cell.py --backend redis --scenario uniform1000 --concurrency 500 --round 2 --interval 5 --results results/20261112
+[2026-11-12 17:05:19] RUN [24/42] python3 run_cell.py --backend pg --scenario uniform1000 --concurrency 500 --round 2 --results results/20261112
+[2026-11-12 17:06:54] EXIT 0 [24/42] 完成 57%  python3 run_cell.py --backend pg --scenario uniform1000 --concurrency 500 --round 2 --results results/20261112
+[2026-11-12 17:06:54] RUN [25/42] python3 run_cell.py --backend pg --scenario hot80 --concurrency 50 --round 3 --results results/20261112
+[2026-11-12 17:08:25] EXIT 0 [25/42] 完成 59%  python3 run_cell.py --backend pg --scenario hot80 --concurrency 50 --round 3 --results results/20261112
+[2026-11-12 17:08:25] RUN [26/42] python3 run_cell.py --backend redis --scenario hot80 --concurrency 50 --round 3 --interval 5 --results results/20261112
+[2026-11-12 17:09:59] EXIT 0 [26/42] 完成 61%  python3 run_cell.py --backend redis --scenario hot80 --concurrency 50 --round 3 --interval 5 --results results/20261112
+[2026-11-12 17:09:59] RUN [27/42] python3 run_cell.py --backend redis --scenario uniform1000 --concurrency 50 --round 3 --interval 5 --results results/20261112
+[2026-11-12 17:11:33] EXIT 0 [27/42] 完成 64%  python3 run_cell.py --backend redis --scenario uniform1000 --concurrency 50 --round 3 --interval 5 --results results/20261112
+[2026-11-12 17:11:33] RUN [28/42] python3 run_cell.py --backend pg --scenario uniform1000 --concurrency 50 --round 3 --results results/20261112
+[2026-11-12 17:13:07] EXIT 0 [28/42] 完成 66%  python3 run_cell.py --backend pg --scenario uniform1000 --concurrency 50 --round 3 --results results/20261112
+[2026-11-12 17:13:07] RUN [29/42] python3 run_cell.py --backend pg --scenario hot80 --concurrency 200 --round 3 --results results/20261112
+[2026-11-12 17:14:38] EXIT 0 [29/42] 完成 69%  python3 run_cell.py --backend pg --scenario hot80 --concurrency 200 --round 3 --results results/20261112
+[2026-11-12 17:14:38] RUN [30/42] python3 run_cell.py --backend redis --scenario hot80 --concurrency 200 --round 3 --interval 5 --results results/20261112
+[2026-11-12 17:16:13] EXIT 0 [30/42] 完成 71%  python3 run_cell.py --backend redis --scenario hot80 --concurrency 200 --round 3 --interval 5 --results results/20261112
+[2026-11-12 17:16:13] RUN [31/42] python3 run_cell.py --backend redis --scenario uniform1000 --concurrency 200 --round 3 --interval 5 --results results/20261112
+[2026-11-12 17:17:48] EXIT 0 [31/42] 完成 73%  python3 run_cell.py --backend redis --scenario uniform1000 --concurrency 200 --round 3 --interval 5 --results results/20261112
+[2026-11-12 17:17:48] RUN [32/42] python3 run_cell.py --backend pg --scenario uniform1000 --concurrency 200 --round 3 --results results/20261112
+[2026-11-12 17:19:23] EXIT 0 [32/42] 完成 76%  python3 run_cell.py --backend pg --scenario uniform1000 --concurrency 200 --round 3 --results results/20261112
+[2026-11-12 17:19:23] RUN [33/42] python3 run_cell.py --backend pg --scenario hot80 --concurrency 500 --round 3 --results results/20261112
+[2026-11-12 17:20:54] EXIT 0 [33/42] 完成 78%  python3 run_cell.py --backend pg --scenario hot80 --concurrency 500 --round 3 --results results/20261112
+[2026-11-12 17:20:55] RUN [34/42] python3 run_cell.py --backend redis --scenario hot80 --concurrency 500 --round 3 --interval 5 --results results/20261112
+[2026-11-12 17:22:31] EXIT 0 [34/42] 完成 80%  python3 run_cell.py --backend redis --scenario hot80 --concurrency 500 --round 3 --interval 5 --results results/20261112
+[2026-11-12 17:22:31] RUN [35/42] python3 run_cell.py --backend redis --scenario uniform1000 --concurrency 500 --round 3 --interval 5 --results results/20261112
+[2026-11-12 17:24:07] EXIT 0 [35/42] 完成 83%  python3 run_cell.py --backend redis --scenario uniform1000 --concurrency 500 --round 3 --interval 5 --results results/20261112
+[2026-11-12 17:24:07] RUN [36/42] python3 run_cell.py --backend pg --scenario uniform1000 --concurrency 500 --round 3 --results results/20261112
+[2026-11-12 17:25:42] EXIT 0 [36/42] 完成 85%  python3 run_cell.py --backend pg --scenario uniform1000 --concurrency 500 --round 3 --results results/20261112
+[2026-11-12 17:25:42] RUN [37/42] python3 redis/crash_test.py --interval 1 --repeat 1 --out-root results/20261112 --csv results/20261112/failures.csv
+[2026-11-12 17:25:57] EXIT 0 [37/42] 完成 88%  python3 redis/crash_test.py --interval 1 --repeat 1 --out-root results/20261112 --csv results/20261112/failures.csv
+[2026-11-12 17:25:57] RUN [38/42] python3 redis/crash_test.py --interval 1 --repeat 2 --out-root results/20261112 --csv results/20261112/failures.csv
+[2026-11-12 17:26:12] EXIT 0 [38/42] 完成 90%  python3 redis/crash_test.py --interval 1 --repeat 2 --out-root results/20261112 --csv results/20261112/failures.csv
+[2026-11-12 17:26:12] RUN [39/42] python3 redis/crash_test.py --interval 1 --repeat 3 --out-root results/20261112 --csv results/20261112/failures.csv
+[2026-11-12 17:26:27] EXIT 0 [39/42] 完成 92%  python3 redis/crash_test.py --interval 1 --repeat 3 --out-root results/20261112 --csv results/20261112/failures.csv
+[2026-11-12 17:26:27] RUN [40/42] python3 redis/crash_test.py --interval 5 --repeat 1 --out-root results/20261112 --csv results/20261112/failures.csv
+[2026-11-12 17:26:48] EXIT 0 [40/42] 完成 95%  python3 redis/crash_test.py --interval 5 --repeat 1 --out-root results/20261112 --csv results/20261112/failures.csv
+[2026-11-12 17:26:48] RUN [41/42] python3 redis/crash_test.py --interval 5 --repeat 2 --out-root results/20261112 --csv results/20261112/failures.csv
+[2026-11-12 17:27:08] EXIT 0 [41/42] 完成 97%  python3 redis/crash_test.py --interval 5 --repeat 2 --out-root results/20261112 --csv results/20261112/failures.csv
+[2026-11-12 17:27:08] RUN [42/42] python3 redis/crash_test.py --interval 5 --repeat 3 --out-root results/20261112 --csv results/20261112/failures.csv
+[2026-11-12 17:27:29] EXIT 0 [42/42] 完成 100%  python3 redis/crash_test.py --interval 5 --repeat 3 --out-root results/20261112 --csv results/20261112/failures.csv
+[2026-11-12 17:27:29] 結束：0 個指令結束碼不為 0（明細見 results/20261112/matrix_20261112162918.log；那幾格是否可用看 runs.csv 的 notes）
+[2026-11-12 17:27:29] 摘要：results/20261112/summary.md

@@ -1,0 +1,7 @@
+== (1) 專案負載器 → Redis（200 併發、hot80、暖機 5 秒、正式 15 秒）
+   第 9 秒起取樣 5 秒（top，%CPU 以單核為 100%）：
+   redis-server      %CPU = 98.4
+   負載器 python3 ×10 合計 %CPU = 762（平均每個 76）
+   負載器結果：82770.1 ops/s, p95 3.65 ms
+== (2) redis-benchmark 直接打 INCR（200 連線、不 pipeline，與負載器一樣一次一個請求）
+INCR: 97518.16 requests per second, p50=1.911 msec

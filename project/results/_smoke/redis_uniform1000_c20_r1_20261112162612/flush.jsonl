@@ -1,0 +1,4 @@
+{"event": "worker_start", "run_id": "redis_uniform1000_c20_r1_20261112162612", "interval_s": 5.0, "ts": 1794500773.33365}
+{"event": "flush", "final": false, "changed": 1000, "redis_sum": 2031918698, "snap_ts": 1794500778.337467, "ms": 53.25, "ts": 1794500778.390723}
+{"event": "flush", "final": true, "changed": 1000, "redis_sum": 2031973377, "snap_ts": 1794500779.516318, "ms": 22.3, "ts": 1794500779.538625}
+{"event": "worker_stop", "code": 0, "ts": 1794500779.539307}

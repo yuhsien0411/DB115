@@ -1,0 +1,11 @@
+寫入：每次回寫插 1,000 列，各 300 次（ms）
+  A 只有主鍵                       中位數   2.61  p95   3.70
+  B 主鍵＋(run_id, flushed_at)    中位數   4.48  p95   5.64
+讀取：取一輪 19,000 列回寫時間軸，各 200 次（ms）
+  A 只有主鍵                       中位數  29.90  p95  35.28
+  B 主鍵＋(run_id, flushed_at)    中位數  15.92  p95  20.29
+大小（灌完 39 萬＋30 萬列後）
+  A 只有主鍵                       表 60 MB  全部索引 15 MB
+  B 主鍵＋(run_id, flushed_at)    表 60 MB  全部索引 80 MB
+  A 只有主鍵 計畫：Gather Merge  (cost=12776.73..15666.53 rows=24768 width=20) / Workers Planned: 2
+  B 主鍵＋(run_id, flushed_at) 計畫：Sort  (cost=11999.41..12070.90 rows=28599 width=20) / Sort Key: flushed_at

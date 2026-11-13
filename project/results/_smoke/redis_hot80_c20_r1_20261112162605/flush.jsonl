@@ -1,0 +1,4 @@
+{"event": "worker_start", "run_id": "redis_hot80_c20_r1_20261112162605", "interval_s": 5.0, "ts": 1794500766.452084}
+{"event": "flush", "final": false, "changed": 1000, "redis_sum": 2031599800, "snap_ts": 1794500771.457795, "ms": 69.74, "ts": 1794500771.527544}
+{"event": "flush", "final": true, "changed": 1000, "redis_sum": 2031664994, "snap_ts": 1794500772.611267, "ms": 20.87, "ts": 1794500772.632139}
+{"event": "worker_stop", "code": 0, "ts": 1794500772.632647}

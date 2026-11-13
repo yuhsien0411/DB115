@@ -1,0 +1,34 @@
+200 0.004239s  ← 前台商品列表（一頁 12 件）  4 條 SQL
+      execute __asyncpg_stmt_3__: SELECT * FROM public.products p WHERE ($1='' OR name ILIKE '%'||$1||'%' OR product_id::text=$1) AND ($2='' OR catego
+      statement: SELECT pg_advisory_unlock_all();
+      execute __asyncpg_stmt_4__: SELECT count(*) FROM public.products WHERE ($1='' OR name ILIKE '%'||$1||'%' OR product_id::text=$1) AND ($2='' OR c
+      statement: SELECT pg_advisory_unlock_all();
+200 0.029391s  ← 前台我的訂單（顧客 1）       2 條 SQL
+      execute __asyncpg_stmt_5__: SELECT o.*,c.name AS customer_name FROM public.orders o JOIN public.customers c USING(customer_id) WHERE ($1::int IS
+      statement: SELECT pg_advisory_unlock_all();
+200 0.003552s  ← 前台訂單明細                     4 條 SQL
+      execute __asyncpg_stmt_6__: SELECT o.*,r.request_id,c.name AS customer_name FROM public.orders o JOIN public.customers c USING(customer_id) LEFT
+      statement: SELECT pg_advisory_unlock_all();
+      execute __asyncpg_stmt_7__: SELECT i.*,p.name FROM public.order_items i JOIN public.products p USING(product_id) WHERE order_id=$1 ORDER BY line
+      statement: SELECT pg_advisory_unlock_all();
+200 0.002323s  ← 前台購物車（顧客 1）          2 條 SQL
+      execute __asyncpg_stmt_8__: 
+      statement: SELECT pg_advisory_unlock_all();
+200 0.035923s  ← 後台商品列表（一頁 12 件含已售） 9 條 SQL
+      execute __asyncpg_stmt_3__: SELECT * FROM public.products p WHERE ($1='' OR name ILIKE '%'||$1||'%' OR product_id::text=$1) AND ($2='' OR catego
+      statement: SELECT pg_advisory_unlock_all();
+      execute __asyncpg_stmt_4__: SELECT count(*) FROM public.products WHERE ($1='' OR name ILIKE '%'||$1||'%' OR product_id::text=$1) AND ($2='' OR c
+      statement: SELECT pg_advisory_unlock_all();
+      execute __asyncpg_stmt_a__: 
+      execute __asyncpg_stmt_b__: WITH RECURSIVE typeinfo_tree(
+      execute __asyncpg_stmt_c__: 
+      execute __asyncpg_stmt_9__: 
+      statement: SELECT pg_advisory_unlock_all();
+200 0.097027s  ← 後台儀表板                        6 條 SQL
+      execute __asyncpg_stmt_d__: SELECT count(*) AS products,sum(stock) AS stock,sum(view_count)::bigint AS pg_views FROM public.products
+      statement: SELECT pg_advisory_unlock_all();
+      execute __asyncpg_stmt_e__: SELECT count(*) AS orders,coalesce(sum(amount),0) AS revenue FROM public.orders
+      statement: SELECT pg_advisory_unlock_all();
+      execute __asyncpg_stmt_f__: SELECT product_id,name,category,view_count FROM public.products ORDER BY view_count DESC,product_id LIMIT 5
+      statement: SELECT pg_advisory_unlock_all();
+(已還原 log_statement)

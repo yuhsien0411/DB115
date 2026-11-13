@@ -1,0 +1,30 @@
+== 開始前   商品1 庫存 = 999994   商品3 庫存 = 999994
+
+######## 第一次（對照組）：只砍掉那條連線
+未提交交易的 pid = 6048；從另一條連線看到的商品1 庫存 = 999994（MVCC：看不到未提交的改動）
+砍掉後  商品1 庫存 = 999994
+-- 這段時間的 log：
+2026-11-12 03:53:05.278 UTC [6048] student@q01_defense FATAL:  terminating connection due to administrator command
+2026-11-12 03:53:05.278 UTC [6048] student@q01_defense STATEMENT:  SELECT pg_sleep(60)
+
+######## 第二次（真的斷電）：pg_ctlcluster 16 main stop -m immediate
+斷電前：商品3 已 COMMIT 扣 5 件 → 999989
+未提交交易的 pid = 6077（商品1 扣了 1 件，沒有 COMMIT）
+（已強制中止）
+重開後  商品1 庫存 = 999994   商品3 庫存 = 999989
+-- 這段時間的 log：
+2026-11-12 03:53:06.453 UTC [509] LOG:  received immediate shutdown request
+2026-11-12 03:53:06.479 UTC [509] LOG:  database system is shut down
+2026-11-12 03:53:07.634 UTC [6095] LOG:  starting PostgreSQL 16.15 (Ubuntu 16.15-0ubuntu0.24.04.1) on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0, 64-bit
+2026-11-12 03:53:07.635 UTC [6095] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2026-11-12 03:53:07.635 UTC [6095] LOG:  listening on IPv6 address "::", port 5432
+2026-11-12 03:53:07.638 UTC [6095] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2026-11-12 03:53:07.645 UTC [6098] LOG:  database system was interrupted; last known up at 2026-11-12 03:50:12 UTC
+2026-11-12 03:53:08.020 UTC [6098] LOG:  database system was not properly shut down; automatic recovery in progress
+2026-11-12 03:53:08.025 UTC [6098] LOG:  redo starts at 2/D6538E0
+2026-11-12 03:53:09.815 UTC [6098] LOG:  invalid record length at 2/315562A0: expected at least 24, got 0
+2026-11-12 03:53:09.815 UTC [6098] LOG:  redo done at 2/31556278 system usage: CPU: user: 1.42 s, system: 0.36 s, elapsed: 1.79 s
+2026-11-12 03:53:09.828 UTC [6096] LOG:  checkpoint starting: end-of-recovery immediate wait
+2026-11-12 03:53:10.230 UTC [6096] LOG:  checkpoint complete: wrote 16285 buffers (99.4%); 0 WAL file(s) added, 0 removed, 36 recycled; write=0.067 s, sync=0.285 s, total=0.403 s; sync files=91, longest=0.047 s, average=0.004 s; distance=588810 kB, estimate=588810 kB; lsn=2/315562A0, redo lsn=2/315562A0
+2026-11-12 03:53:10.239 UTC [6095] LOG:  database system is ready to accept connections
+2026-11-12 03:53:12.370 UTC [6144] student@student FATAL:  database "student" does not exist

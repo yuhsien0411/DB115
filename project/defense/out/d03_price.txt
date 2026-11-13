@@ -1,0 +1,34 @@
+BEGIN;
+BEGIN
+SELECT o.order_id, o.amount AS 存下的金額,
+       sum(i.quantity * i.unit_price) AS 用成交價加總,
+       sum(i.quantity * p.price)      AS 用現價加總_錯誤做法
+FROM orders o JOIN order_items i USING (order_id) JOIN products p USING (product_id)
+WHERE o.order_id = 1000407 GROUP BY 1,2;
+ order_id | 存下的金額 | 用成交價加總 | 用現價加總_錯誤做法 
+----------+------------+--------------+---------------------
+  1000407 |    3127.30 |      3127.30 |             3127.30
+(1 row)
+
+SELECT i.line_no, i.product_id, i.quantity, i.unit_price AS 成交價, p.price AS 現價
+FROM order_items i JOIN products p USING (product_id) WHERE i.order_id = 1000407 ORDER BY 1;
+ line_no | product_id | quantity | 成交價  |  現價   
+---------+------------+----------+---------+---------
+       1 |          4 |        1 | 3127.30 | 3127.30
+(1 row)
+
+UPDATE products SET price = price * 2
+WHERE product_id IN (SELECT product_id FROM order_items WHERE order_id = 1000407);
+UPDATE 1
+SELECT o.order_id, o.amount AS 存下的金額,
+       sum(i.quantity * i.unit_price) AS 用成交價加總,
+       sum(i.quantity * p.price)      AS 用現價加總_錯誤做法
+FROM orders o JOIN order_items i USING (order_id) JOIN products p USING (product_id)
+WHERE o.order_id = 1000407 GROUP BY 1,2;
+ order_id | 存下的金額 | 用成交價加總 | 用現價加總_錯誤做法 
+----------+------------+--------------+---------------------
+  1000407 |    3127.30 |      3127.30 |             6254.60
+(1 row)
+
+ROLLBACK;
+ROLLBACK

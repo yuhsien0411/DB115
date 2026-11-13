@@ -1,0 +1,9 @@
+NOTICE:  function place_order_nolock(pg_catalog.int4,pg_catalog.int4[],pg_catalog.int4[]) does not exist, skipping
+1c1
+< CREATE OR REPLACE FUNCTION public.place_order(p_customer integer, p_products integer[], p_qty integer[])
+---
+> CREATE OR REPLACE FUNCTION public.place_order_nolock(p_customer integer, p_products integer[], p_qty integer[])
+24c24
+<           ORDER BY product_id FOR UPDATE) l;
+---
+>           ORDER BY product_id) l;   -- ← 防11：FOR UPDATE 拿掉了

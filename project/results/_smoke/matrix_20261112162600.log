@@ -1,0 +1,22 @@
+[OK] 殘留的實驗行程或網站：0 個
+[OK] PostgreSQL 其他 client 連線：0 條
+[OK] Redis 其他 client 連線：0 條
+[OK] PostgreSQL 名額：需要 20（取樣器另 1 條），max_connections=500
+[OK] Redis 名額：需要 20，maxclients=10000
+[OK] 檔案描述元上限（ulimit -n）：1048576，至少需要 276
+全部通過，可以開始壓測。
+[2026-11-12 16:26:01] 開始：rounds=[1] concurrency=[20] scenarios=[hot80 uniform1000] backends=[pg redis] T=5 crash_T=[1 5]x1
+[2026-11-12 16:26:01] RUN [1/6] python3 run_cell.py --backend pg --scenario hot80 --concurrency 20 --round 1 --warmup 1 --duration 3 --results results/_smoke --note smoke
+[2026-11-12 16:26:05] EXIT 0 [1/6] 完成 16%  python3 run_cell.py --backend pg --scenario hot80 --concurrency 20 --round 1 --warmup 1 --duration 3 --results results/_smoke --note smoke
+[2026-11-12 16:26:05] RUN [2/6] python3 run_cell.py --backend redis --scenario hot80 --concurrency 20 --round 1 --interval 5 --warmup 1 --duration 3 --results results/_smoke --note smoke
+[2026-11-12 16:26:12] EXIT 0 [2/6] 完成 33%  python3 run_cell.py --backend redis --scenario hot80 --concurrency 20 --round 1 --interval 5 --warmup 1 --duration 3 --results results/_smoke --note smoke
+[2026-11-12 16:26:12] RUN [3/6] python3 run_cell.py --backend redis --scenario uniform1000 --concurrency 20 --round 1 --interval 5 --warmup 1 --duration 3 --results results/_smoke --note smoke
+[2026-11-12 16:26:19] EXIT 0 [3/6] 完成 50%  python3 run_cell.py --backend redis --scenario uniform1000 --concurrency 20 --round 1 --interval 5 --warmup 1 --duration 3 --results results/_smoke --note smoke
+[2026-11-12 16:26:19] RUN [4/6] python3 run_cell.py --backend pg --scenario uniform1000 --concurrency 20 --round 1 --warmup 1 --duration 3 --results results/_smoke --note smoke
+[2026-11-12 16:26:24] EXIT 0 [4/6] 完成 66%  python3 run_cell.py --backend pg --scenario uniform1000 --concurrency 20 --round 1 --warmup 1 --duration 3 --results results/_smoke --note smoke
+[2026-11-12 16:26:24] RUN [5/6] python3 redis/crash_test.py --interval 1 --repeat 1 --kill-after 2 --concurrency 20 --out-root results/_smoke --csv results/_smoke/failures.csv
+[2026-11-12 16:26:30] EXIT 0 [5/6] 完成 83%  python3 redis/crash_test.py --interval 1 --repeat 1 --kill-after 2 --concurrency 20 --out-root results/_smoke --csv results/_smoke/failures.csv
+[2026-11-12 16:26:30] RUN [6/6] python3 redis/crash_test.py --interval 5 --repeat 1 --kill-after 2 --concurrency 20 --out-root results/_smoke --csv results/_smoke/failures.csv
+[2026-11-12 16:26:41] EXIT 0 [6/6] 完成 100%  python3 redis/crash_test.py --interval 5 --repeat 1 --kill-after 2 --concurrency 20 --out-root results/_smoke --csv results/_smoke/failures.csv
+[2026-11-12 16:26:41] 結束：0 個指令結束碼不為 0（明細見 results/_smoke/matrix_20261112162600.log；那幾格是否可用看 runs.csv 的 notes）
+[2026-11-12 16:26:41] 摘要：results/_smoke/summary.md

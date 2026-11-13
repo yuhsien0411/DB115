@@ -1,0 +1,13 @@
+pgbench (16.15 (Ubuntu 16.15-0ubuntu0.24.04.1))
+transaction type: /workspace/project/pg/pg_hot80.sql
+scaling factor: 1
+query mode: simple
+number of clients: 200
+number of threads: 16
+maximum number of tries: 1
+duration: 60 s
+number of transactions actually processed: 265649
+number of failed transactions: 0 (0.000%)
+latency average = 45.183 ms
+initial connection time = 157.597 ms
+tps = 4426.483833 (without initial connection time)

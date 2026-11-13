@@ -1,0 +1,21 @@
+{"event": "worker_start", "run_id": "redis_hot80_c200_r1_20261112163703", "interval_s": 5.0, "ts": 1794501423.713096}
+{"event": "flush", "final": false, "changed": 1000, "redis_sum": 2053079700, "snap_ts": 1794501428.715289, "ms": 59.23, "ts": 1794501428.774525}
+{"event": "flush", "final": false, "changed": 1000, "redis_sum": 2053548627, "snap_ts": 1794501433.71933, "ms": 39.61, "ts": 1794501433.758944}
+{"event": "flush", "final": false, "changed": 1000, "redis_sum": 2054024564, "snap_ts": 1794501438.715307, "ms": 51.7, "ts": 1794501438.767015}
+{"event": "flush", "final": false, "changed": 1000, "redis_sum": 2054486095, "snap_ts": 1794501443.715275, "ms": 52.9, "ts": 1794501443.768184}
+{"event": "flush", "final": false, "changed": 1000, "redis_sum": 2054940170, "snap_ts": 1794501448.715286, "ms": 47.24, "ts": 1794501448.76253}
+{"event": "flush", "final": false, "changed": 1000, "redis_sum": 2055396124, "snap_ts": 1794501453.717685, "ms": 30.87, "ts": 1794501453.748558}
+{"event": "flush", "final": false, "changed": 1000, "redis_sum": 2055838139, "snap_ts": 1794501458.713698, "ms": 44.25, "ts": 1794501458.757952}
+{"event": "flush", "final": false, "changed": 1000, "redis_sum": 2056283137, "snap_ts": 1794501463.717697, "ms": 38.51, "ts": 1794501463.75621}
+{"event": "flush", "final": false, "changed": 1000, "redis_sum": 2056733330, "snap_ts": 1794501468.721663, "ms": 42.57, "ts": 1794501468.764239}
+{"event": "flush", "final": false, "changed": 1000, "redis_sum": 2057196179, "snap_ts": 1794501473.721666, "ms": 44.66, "ts": 1794501473.766329}
+{"event": "flush", "final": false, "changed": 1000, "redis_sum": 2057645309, "snap_ts": 1794501478.713709, "ms": 33.25, "ts": 1794501478.746967}
+{"event": "flush", "final": false, "changed": 1000, "redis_sum": 2058071249, "snap_ts": 1794501483.716318, "ms": 37.02, "ts": 1794501483.753342}
+{"event": "flush", "final": false, "changed": 1000, "redis_sum": 2058507333, "snap_ts": 1794501488.712275, "ms": 31.64, "ts": 1794501488.74392}
+{"event": "flush", "final": false, "changed": 1000, "redis_sum": 2058965716, "snap_ts": 1794501493.712238, "ms": 38.02, "ts": 1794501493.75026}
+{"event": "flush", "final": false, "changed": 1000, "redis_sum": 2059432748, "snap_ts": 1794501498.712254, "ms": 30.23, "ts": 1794501498.742493}
+{"event": "flush", "final": false, "changed": 1000, "redis_sum": 2059886978, "snap_ts": 1794501503.716309, "ms": 34.86, "ts": 1794501503.751171}
+{"event": "flush", "final": false, "changed": 1000, "redis_sum": 2060341494, "snap_ts": 1794501508.71629, "ms": 34.03, "ts": 1794501508.750329}
+{"event": "flush", "final": false, "changed": 1000, "redis_sum": 2060780990, "snap_ts": 1794501513.710436, "ms": 54.29, "ts": 1794501513.764736}
+{"event": "flush", "final": true, "changed": 1000, "redis_sum": 2061013900, "snap_ts": 1794501517.768066, "ms": 21.63, "ts": 1794501517.789698}
+{"event": "worker_stop", "code": 0, "ts": 1794501517.790197}
